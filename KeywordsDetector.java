@@ -17,10 +17,57 @@ public class KeywordsDetector {
         String[] keywords = {"synergy", "disrupt", "leverage", "Paradigm", "transform"};
         detectAndPrint(sentences, keywords);
     }
+    
+    public static String lowerCase(String str) {
+        String LowerCaseString = "";
+
+        for (int i = 0; i < str.length(); i++){
+                int C = str.charAt(i);
+
+            if ( C >= 65 && C <= 90) {
+                LowerCaseString += (char)(C + 32);
+            } else {
+                LowerCaseString += (char)C; 
+            }
+        }
+        return LowerCaseString;        
+    }
+    
+    public static boolean contains(String str1, String str2) {
+        if (str2.isEmpty()) {
+            return true;
+        }
+        
+        String lowerCaseStr1 = lowerCase(str1);
+        String lowerCaseStr2 = lowerCase(str2);
+
+        for (int i = 0; i <= lowerCaseStr1.length() - lowerCaseStr2.length(); i++) {
+            boolean match = true;
+            for (int j = 0; j < lowerCaseStr2.length(); j++) {
+                if (lowerCaseStr1.charAt(i + j) != lowerCaseStr2.charAt(j)) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Iterates through all the sentences.
     // If a sentence contains one or more of the kewords, prints it.
     public static void detectAndPrint(String[] sentences, String[] keywords) {
-        // Replace this comment with your code
+        for (int i = 0; i < sentences.length; i++) {
+            String currentSentence = lowerCase(sentences[i]);
+            for (int j = 0; j < keywords.length; j++){
+                String currentWord = lowerCase(keywords[j]);
+                if (contains(currentSentence, currentWord)) {
+                System.out.println(sentences[i]);
+                break;
+                }
+            }
+        }
     }
 }
