@@ -24,7 +24,7 @@ public class Primes {
         System.out.println("Prime numbers up to " + limit + ":");
         for (int p = 2; p <= limit; p++) {
             if (prime[p]) {
-                System.out.println(p + " ");
+                System.out.println(p);
                 PrimeAmount++;
             }
         }
